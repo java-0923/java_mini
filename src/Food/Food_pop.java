@@ -1,3 +1,5 @@
+package Food;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -8,7 +10,6 @@ public class Food_pop implements Serializable{
 
     public Food_pop(String name, double price) {
         this.name = name;
-//        this.popList = popList;
         this.price = price;
     }
 
@@ -28,13 +29,6 @@ public class Food_pop implements Serializable{
         this.price = price;
     }
 
-    public Set<String> getPopList() {
-        return popList;
-    }
-
-    public void setPopList(Set<String> popList) {
-        this.popList = popList;
-    }
 
     public void info() {
         System.out.println("상품명: " + name);
@@ -44,7 +38,7 @@ public class Food_pop implements Serializable{
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
+                "item='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }
