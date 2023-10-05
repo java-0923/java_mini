@@ -21,10 +21,11 @@ public class FoodRepository {
         }
     }
 
-    // Show the list of products
-    public void showProductList() {
+    public void showMenuList() {
+        System.out.println("메뉴 목록:");
+        int menuNumber = 1;
         for (Food_pop Fpop : popList.values()) {
-            System.out.println(Fpop);
+            System.out.printf("%d. %s %,.0f원\n", menuNumber++, Fpop.getName(), Fpop.getPrice());
         }
     }
 
