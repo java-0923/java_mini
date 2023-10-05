@@ -11,9 +11,9 @@ public class FoodRepository {
         popList = new HashMap<>();
     }
 
-    public boolean addNewMenu(String name, double price) {
+    public boolean addNewMenu(String name, String popcount ) {
         if (!popList.containsKey(name)) {
-            Food_pop Fpop = new Food_pop(name, price);
+            Food_pop Fpop = new Food_pop(name, popcount);
             popList.put(name, Fpop);
             return true;
         } else {
@@ -21,13 +21,6 @@ public class FoodRepository {
         }
     }
 
-    public void showMenuList() {
-        System.out.println("메뉴 목록:");
-        int menuNumber = 1;
-        for (Food_pop Fpop : popList.values()) {
-            System.out.printf("%d. %s %,.0f원\n", menuNumber++, Fpop.getName(), Fpop.getPrice());
-        }
-    }
 
     public static Map<String, Food_pop> getProductList() {
         return popList;
