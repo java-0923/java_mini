@@ -13,7 +13,7 @@ public class FoodView {
     public static void start() {
         while (true) {
             System.out.println("\n\n****** 음식 주문 프로그램 ******");
-            System.out.printf("$ 현재 등록된 주문 $ : %d명\n", ar.count());
+            System.out.printf("$ 현재 등록된 주문 $ : %d개\n", ar.count());
             System.out.println("* 1. 팝콘 주문 하기");
             System.out.println("# 2. 음료수 주문 하기");
             System.out.println("% 3. 사이드 메뉴 주문 하기");
