@@ -4,6 +4,4 @@ import java.io.Serializable;
 
 public class TicketRepositories implements Serializable {
 
-
-
 }
