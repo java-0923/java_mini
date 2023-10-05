@@ -45,13 +45,12 @@ public class FoodView {
         String drinkName = input("- 음료수: ");
         String sideName = input("- 음료수: ");
 
-        // 기존에 등록된 가수인가?
-        if (!ar.isRegistered(popconName)) { // 등록되지 않은 신규 가수라면
+        // 기존에 등록된 주문자 인가?
+        if (!ar.isRegistered(popconName)) { // 등록되지 않은 신규 주문자라면
             ar.addNewMenu(popconName, drinkName);
             System.out.printf("\n# %s님이 신규 주문 되었습니다.\n", popconName);
-        } else { // 기존 등록된 가수에 노래만 추가
-            // 새로운 가수정보를 생성하는게 아니라
-            // 기존 가수 정보에서 노래정보만 추가하면 됨
+        } else { // 기존 등록된 주문자에 메뉴만 추가
+
             boolean flag = ar.addNewMenu(popconName, drinkName);
             if (flag) {
                 System.out.printf("\n# %s님의 주문메뉴 에 %s개 추가되었습니다.\n", popconName, drinkName);
