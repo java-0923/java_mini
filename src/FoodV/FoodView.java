@@ -48,12 +48,12 @@ public class FoodView {
         // 기존에 등록된 주문자 인가?
         if (!ar.isRegistered(popconName)) { // 등록되지 않은 신규 주문자라면
             ar.addNewMenu(popconName, drinkName);
-            System.out.printf("\n# %s님이 신규 주문 되었습니다.\n", popconName);
+            System.out.printf("\n# %s 신규 주문 되었습니다.\n", popconName);
         } else { // 기존 등록된 주문자에 메뉴만 추가
 
             boolean flag = ar.addNewMenu(popconName, drinkName);
             if (flag) {
-                System.out.printf("\n# %s님의 주문메뉴 에 %s개 추가되었습니다.\n", popconName, drinkName);
+                System.out.printf("\n# %s 주문메뉴 에 %s개 추가되었습니다.\n", popconName, drinkName);
             } else {
                 System.out.printf("\n# [%s]은 이미 주문된 메뉴입니다.\n", drinkName);
             }
