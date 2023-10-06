@@ -95,4 +95,8 @@ public class MovieList {
         this.time = time;
     }
 
+    public String info() {
+        return String.format("%s   %s   %s   %d   %d   %d",this.movieName,this.director,this.genre,this.accessAge,this.runtime,this.ticket_price);
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class MovieView {
     Scanner sc;
+    TicketRepositories tr;
 
     public MovieView() {
         this.sc = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class MovieView {
         String input = input("번호를 선택해라 >> ");
         switch (input){
             case "1" :
-                System.out.println("1번은 없다.");
+                tr.getMovieList();
                 break;
             case "2" :
                new GenreView();

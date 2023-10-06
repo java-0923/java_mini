@@ -22,7 +22,11 @@ public class TicketRepositories implements Serializable {
         };
     }
 
-
+    public void getMovieList() {
+        for (MovieList list : movieList) {
+            System.out.println(list.info());
+        }
+    }
 
 
 
