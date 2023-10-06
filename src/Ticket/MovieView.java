@@ -34,7 +34,7 @@ public class MovieView {
                 break;
             case "3" :
                 new Age();
-                break;
+                break ;
             case "4" :
                 break;
             case "5" :
