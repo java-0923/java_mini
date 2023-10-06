@@ -8,7 +8,6 @@ public class MovieList {
     private int ticket_price; // 티켓 값
     private int runtime;  // 상영시간 ( 영화의 길이 )
     private int time; // 상영시간 ( 영화 상영 시간 )
-    private String day_of_week;  // 상영요일
     private boolean login;// 로그인 여부 ( 할인 )
 
 
@@ -18,8 +17,7 @@ public class MovieList {
     //생성자
 
     public MovieList(String movieName, String director, String genre,
-                     int accessAge, int ticket_price, int runtime, int time,
-                     String day_of_week) {
+                     int accessAge, int ticket_price, int runtime, int time) {
         this.movieName = movieName;
         this.director = director;
         this.genre = genre;
@@ -27,7 +25,6 @@ public class MovieList {
         this.ticket_price = ticket_price;
         this.runtime = runtime;
         this.time = time;
-        this.day_of_week = day_of_week;
     }
 
 
@@ -98,11 +95,4 @@ public class MovieList {
         this.time = time;
     }
 
-    public String getDay_of_week() {
-        return day_of_week;
-    }
-
-    public void setDay_of_week(String day_of_week) {
-        this.day_of_week = day_of_week;
-    }
 }
