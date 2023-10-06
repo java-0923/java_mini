@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FoodRepository {
-    private static Map<String, Food_pop> popList;
+    private static Map<String, Food_pop> MenuList;
 
     static {
-        popList = new HashMap<>();
+        MenuList = new HashMap<>();
     }
 
     public boolean addNewMenu(String name, String popcount ) {
-        if (!popList.containsKey(name)) {
+        if (!MenuList.containsKey(name)) {
             Food_pop Fpop = new Food_pop(name, popcount);
-            popList.put(name, Fpop);
+            MenuList.put(name, Fpop);
             return true;
         } else {
             return false;
@@ -23,14 +23,14 @@ public class FoodRepository {
 
 
     public static Map<String, Food_pop> getProductList() {
-        return popList;
+        return MenuList;
     }
 
     public void autoSave() {
-        File f = new File("Popcon.sav");
+        File f = new File("Menu.sav");
         try (FileOutputStream fos = new FileOutputStream(f)) {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(popList);
+            oos.writeObject(MenuList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,24 +38,23 @@ public class FoodRepository {
 
     // Load product data from a file
     public void loadFile() {
-        File f = new File("Popcon.sav");
+        File f = new File("Menu.sav");
         if (f.exists()) {
             try (FileInputStream fis = new FileInputStream(f)) {
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                popList = (Map<String, Food_pop>) ois.readObject();
+                MenuList = (Map<String, Food_pop>) ois.readObject();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    // FoodRepository 클래스에서
     public int count() {
-        return popList.size(); // 주문 수를 얻고자 하는 경우
+        return MenuList.size(); // 주문 수를 얻고자 하는 경우
     }
 
 
     public boolean isRegistered(String popconName) {
-        return popList.containsKey(popconName);
+        return MenuList.containsKey(popconName);
     }
 }
