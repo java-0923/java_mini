@@ -7,7 +7,6 @@ public class MovieList {
     private int accessAge; // 연령제한
     private int ticket_price; // 티켓 값
     private int runtime;  // 상영시간 ( 영화의 길이 )
-    private int time; // 상영시간 ( 영화 상영 시간 )
     private boolean login;// 로그인 여부 ( 할인 )
 
 
@@ -17,14 +16,13 @@ public class MovieList {
     //생성자
 
     public MovieList(String movieName, String director, String genre,
-                     int accessAge, int ticket_price, int runtime, int time) {
+                     int accessAge, int ticket_price, int runtime) {
         this.movieName = movieName;
         this.director = director;
         this.genre = genre;
         this.accessAge = accessAge;
         this.ticket_price = ticket_price;
         this.runtime = runtime;
-        this.time = time;
     }
 
 
@@ -87,16 +85,11 @@ public class MovieList {
         this.login = login;
     }
 
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
     public String info() {
-        return String.format("%s   %s   %s   %d   %d   %d",this.movieName,this.director,this.genre,this.accessAge,this.runtime,this.ticket_price);
+        return String.format(" 영화제목 : %s \n 감독 : %s \n 장르 : %s \n 연령제한 : %d " +
+                        "\n 티켓가격 : %d \n 상영시간 : %d \n",
+                this.movieName, this.director, this.genre,
+                this.accessAge,  this.ticket_price, this.runtime);
     }
 
 }

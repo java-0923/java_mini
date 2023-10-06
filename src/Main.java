@@ -4,6 +4,6 @@ import Ticket.MovieView;
 // Enter를 누르세요. 그러면 코드 내에서 공백 문자를 확인할 수 있습니다.
 public class Main {
     public static void main(String[] args) {
-        new MovieView();
+        new MovieView().choice();
     }
 }

@@ -3,16 +3,18 @@ package Ticket;
 import Ticket.age.Age;
 import Ticket.genre.GenreView;
 
-import java.util.Scanner;
+import static utilt.Utilty.input;
 
 public class MovieView {
-    Scanner sc;
-    TicketRepositories tr;
+    TicketRepositories tr = new TicketRepositories();
 
     public MovieView() {
-        this.sc = new Scanner(System.in);
-        choice();
+
     }
+
+    /**
+     * 초가 화면
+     */
     void mainView(){
         System.out.println(" ************************** ");
         System.out.println("       1️⃣영화 모두 보기        ");
@@ -23,12 +25,16 @@ public class MovieView {
         System.out.println(" ************************** ");
     }
 
-    void choice(){
+    /**
+     * 메뉴 선택에 따른 표현
+     */
+    public void choice(){
         mainView();
         String input = input("번호를 선택해라 >> ");
         switch (input){
             case "1" :
                 tr.getMovieList();
+                reservation();
                 break;
             case "2" :
                new GenreView();
@@ -44,8 +50,36 @@ public class MovieView {
         }
     }
 
-     public String input(String message){
-        System.out.print(message);
-        return sc.nextLine();
+
+    /**
+     * 예매하기, 돌아가기
+     */
+    private void reservation(){
+        System.out.println(" 🎟️예매하기 (1️⃣)");
+        System.out.println(" ⬅️돌아가기 (2️⃣)");
+
+        String input = input("예매 할꺼냐 ? ");
+
+        while (true){
+            switch (input){
+                case "1" :
+
+                case "2" :
+                    tr.getMovieList();
+                    reservation();
+                    break;
+                default:
+                    System.out.println("메뉴 시발 똑바로 정해");
+                    reservation();
+                    break;
+            }
+        }
     }
+
+    /**
+     * 영화 제목을 입력하면 그 영화
+     * 예매를 도와주는 메서드
+     */
+
+
 }
