@@ -1,14 +1,14 @@
 package Food;
-
 import java.io.Serializable;
 
-public class Food_pop implements Serializable{
+public class Food_pop implements Serializable {
     private String name;        // 상품명
     private int price;          // 가격(상품 가격)
     private int popcount;       // 팝콘 개수
     private int dricount;       // 음료 개수
     private int sidcount;       // 사이드 개수
     private double totalPrice;  // 총 가격(등록 메뉴 누적 가격)
+
 
     public Food_pop(String name, int price) {
         this.name = name;
@@ -67,12 +67,20 @@ public class Food_pop implements Serializable{
         this.totalPrice = totalPrice;
     }
 
+    public void updateTotalPrice() {
+        this.totalPrice = (popcount + dricount + sidcount) * price;
+    }
+
+
     @Override
     public String toString() {
         return "Food_pop{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
+                ", popcount=" + popcount +
+                ", dricount=" + dricount +
+                ", sidcount=" + sidcount +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
-
 }
