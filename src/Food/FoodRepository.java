@@ -2,6 +2,7 @@ package Food;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class FoodRepository {
     public static Map<String, Food_pop> MenuList;
@@ -29,11 +30,11 @@ public class FoodRepository {
             menu.setSidcount(sidcount);
             menu.updateTotalPrice();
 
-            if (!UserMenuList.containsKey(name)) {
-                UserMenuList.put(name, new Food_pop(name, menu.getPrice()));
+            if (!UserMenuList.containsKey(menu.getOrderNumber())) {
+                UserMenuList.put(menu.getOrderNumber(), menu);
             }
 
-            Food_pop userOrder = UserMenuList.get(name);
+            Food_pop userOrder = UserMenuList.get(menu.getOrderNumber());
             userOrder.setPopcount(popcount);
             userOrder.setDricount(dricount);
             userOrder.setSidcount(sidcount);
@@ -44,12 +45,17 @@ public class FoodRepository {
         return false;
     }
 
+
     public static Map<String, Food_pop> getMenuList() {
         return UserMenuList;
     }
 
-    public double getTotalOrderPrice() {
-        double totalPrice = 0.0;
+//    public Map<String, Food_pop> getUserMenuList() {
+//        return UserMenuList;
+//    }
+
+    public int getTotalOrderPrice() {
+        int totalPrice = 0;
         for (Food_pop userOrder : UserMenuList.values()) {
             totalPrice += userOrder.getTotalPrice();
         }
