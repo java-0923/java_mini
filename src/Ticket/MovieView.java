@@ -1,14 +1,13 @@
 package Ticket;
-import Ticket.age.Age;
-import Ticket.genre.GenreView;
 
 import static utilt.Utilty.input;
 
 public class MovieView {
     TicketRepositories tr = new TicketRepositories();
+//    Age ag = new Age();
 
     public MovieView() {
-
+        choice();
     }
 
 
@@ -16,7 +15,7 @@ public class MovieView {
     /**
      * 초가 화면
      */
-    void mainView(){
+    void mainView(){  // 키오스크 영화 파트 메인 View
         System.out.println(" ************************** ");
         System.out.println("       1️⃣영화 모두 보기        ");
         System.out.println("       2️⃣장르별 영화 보기       ");
@@ -26,7 +25,7 @@ public class MovieView {
         System.out.println(" ************************** ");
     }
 
-    static void genreView(){
+    static void genreView(){  // 장르별 영화 선택 View창
         System.out.println(" ************************** ");
         System.out.println("       1. 액션        ");
         System.out.println("       2. 코미디       ");
@@ -37,22 +36,32 @@ public class MovieView {
         System.out.println(" ************************** ");
     }
 
+    static void ageMainView() {
+        System.out.println(" ************************** ");
+        System.out.println("       🍼 애기               ");
+        System.out.println("       🍼 12세               ");
+        System.out.println("       🍼 15세               ");
+        System.out.println("       🔞 19금              ");
+        System.out.println("       ⬅️ 돌아가기            ");
+        System.out.println(" ************************** ");
+    }
+
     /**
      * 메뉴 선택에 따른 표현
      */
     public void choice(){
+        while (true){
         mainView();
         String input = input("번호를 선택해라 >> ");
         switch (input){
             case "1" :
-                tr.getMovieList();
-                reservation();
+                AllMovieList();
                 break;
             case "2" :
                 genre();
                 break;
             case "3" :
-                new Age();
+                ageChoice();
                 break ;
             case "4" :
 
@@ -61,37 +70,75 @@ public class MovieView {
                 System.exit(0);
                 break;
         }
+        }
+
     }
 
+    public void AllMovieList(){
+        tr.getMovieList();
+        reservation();
+    }
+
+    // 장르별 영화 선택하기
     public void genre(){
         genreView();
         String input = input("원하는 장르 선택 >> ");
         switch (input){
             case "1" :
                 tr.getGenreMovieList("1");
-                break;
+                reservation();
             case "2" :
                 tr.getGenreMovieList("2");
-                break;
+                reservation();
             case "3" :
                 tr.getGenreMovieList("3");
-                break ;
+                reservation();
             case "4" :
                 tr.getGenreMovieList("4");
-                break;
+                reservation();
             case "5" :
                 tr.getGenreMovieList("5");
-                break;
+                reservation();
             case "6":
                 break;
         }
     }
 
 
+
+    public void ageChoice() {
+        ageMainView();
+        String input = input("원하는 연령을 골라 >> ");
+        switch (input) {
+            case "1":
+                System.out.println("전체이용가 선택");
+                tr.getAgeMovieList(0);
+                reservation();
+                break;
+            case "2":
+                System.out.println("12세 선택");
+                tr.getAgeMovieList(12);
+                reservation();
+                break;
+            case "3":
+                System.out.println("15세 선택");
+                tr.getAgeMovieList(15);
+                reservation();
+                break;
+            case "4":
+                System.out.println("19세 선택");
+                System.out.println("현재 상영중인 19세 이용가 영화가 없습니다");
+                break;
+            case "5":
+                new MovieView();
+                break;
+        }
+    }
+
     /**
      * 예매하기, 돌아가기
      */
-    private void reservation(){
+    public void reservation(){
         System.out.println("====================");
         System.out.println("  🎟️예매하기 (1️⃣)");
         System.out.println("  ⬅️돌아가기 (2️⃣)");
@@ -105,8 +152,7 @@ public class MovieView {
                     inputMovieName();
                     break;
                 case "2" :
-                    tr.getMovieList();
-                    reservation();
+                    choice();
                     break;
                 default:
                     System.out.println("메뉴 시발 똑바로 정해");
