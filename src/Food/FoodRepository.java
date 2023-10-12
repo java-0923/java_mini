@@ -1,5 +1,6 @@
 package Food;
 import java.io.*;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -8,6 +9,7 @@ public class FoodRepository {
     public static Map<String, Food_pop> MenuList;
     public static Map<String, Food_pop> UserMenuList;
 
+    // 메뉴 리스트
     static {
         MenuList = new HashMap<>();
         MenuList.put("오리지널", new Food_pop("오리지널", 2000));
@@ -22,6 +24,7 @@ public class FoodRepository {
         UserMenuList = new HashMap<>();
     }
 
+    // 메뉴 저장
     public boolean addNewMenu(String name, int popcount, int dricount, int sidcount) {
         if (MenuList.containsKey(name)) {
             Food_pop menu = MenuList.get(name);
@@ -46,14 +49,16 @@ public class FoodRepository {
     }
 
 
+    // 리스트 가져오기
     public static Map<String, Food_pop> getMenuList() {
         return UserMenuList;
     }
 
-//    public Map<String, Food_pop> getUserMenuList() {
-//        return UserMenuList;
-//    }
+    public Map<String, Food_pop> getUserMenuList() {
+        return UserMenuList;
+    }
 
+    // 총 금액 가져오기 (price 합산)
     public int getTotalOrderPrice() {
         int totalPrice = 0;
         for (Food_pop userOrder : UserMenuList.values()) {
@@ -62,7 +67,7 @@ public class FoodRepository {
         return totalPrice;
     }
 
-
+    // 저장 코드 (절대 건들지 말것.)
     public void autoSave() {
         File f = new File("Menu.sav");
         try (FileOutputStream fos = new FileOutputStream(f)) {
@@ -73,6 +78,7 @@ public class FoodRepository {
         }
     }
 
+    // 가져오기 코드 (절대 건들지 말것.)
     public void loadFile() {
         File f = new File("Menu.sav");
         if (f.exists()) {
@@ -85,6 +91,7 @@ public class FoodRepository {
         }
     }
 
+    // 주문 수 카운트
     public int count() {
         return getMenuList().size();
     }

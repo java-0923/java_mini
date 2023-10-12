@@ -1,4 +1,5 @@
 package Food;
+import java.util.Objects;
 import java.util.UUID;
 
 import static Food.FoodRepository.*;
@@ -16,16 +17,16 @@ public class FoodView {
     public static void start() {
 
         // 기능들 테스트 후 살려놓을 코드.
-//        ar.loadFile();
+        ar.loadFile();
 
         while (true) {
             System.out.println("\n\n****** 음식 주문 프로그램 ******");
             System.out.printf("$ 현재 등록된 주문 $ : %d개\n", ar.count());
-            System.out.println("* 1. 팝콘 주문 하기");
-            System.out.println("# 2. 음료수 주문 하기");
-            System.out.println("% 3. 사이드 메뉴 주문 하기");
-            System.out.println("& 4. 결제 하기");
-            System.out.println("@ 5. 나가기");
+            System.out.println("* \uD83C\uDF7F 1. 팝콘 주문 하기");
+            System.out.println("# \uD83E\uDD64 2. 음료수 주문 하기");
+            System.out.println("% \uD83C\uDF2E 3. 사이드 메뉴 주문 하기");
+            System.out.println("& \uD83D\uDCB3 4. 결제 하기");
+            System.out.println("@ \uD83D\uDEAA 5. 나가기");
 
             makeLine();
 
@@ -39,7 +40,7 @@ public class FoodView {
                     drinkMenuSelect();
                     break;
                 case "3":
-//                    sideMenuSelect();
+                    sideMenuSelect();
                     break;
                 case "4" :
                     payMent();
@@ -66,8 +67,6 @@ public class FoodView {
 
         String name = input("- 상품 번호를 선택하세요: ");
         int popcount;
-        int dricount;
-        int sidcount;
         try {
             popcount = Integer.parseInt(input("- 개수: "));
         } catch (NumberFormatException e) {
@@ -96,14 +95,13 @@ public class FoodView {
                 return;
         }
 
-        // UserMenuList에 주문 추가
+        // UserMenuList에 주문 추가 (카운트 및 총 금액)
         String orderNumber = new Food_pop(popconSelect, price * popcount).getOrderNumber();
         UserMenuList.put(orderNumber, new Food_pop(popconSelect, price));
         Food_pop userOrder = UserMenuList.get(orderNumber);
         userOrder.setPopcount(popcount);
         userOrder.updateTotalPrice();
         System.out.printf("\n# %s %d개가 주문 되었습니다. (주문 번호: %s)\n", popconSelect, popcount, orderNumber);
-        System.out.println(UserMenuList);
         ar.autoSave();
     }
 
@@ -148,59 +146,66 @@ public class FoodView {
                 return;  // 메뉴 선택 오류 시 메서드 종료
         }
 
-        // UserMenuList에 주문 추가
-        UserMenuList.put(UUID.randomUUID().toString().substring(0, 5), new Food_pop(drinkSelect, price * dricount));
-        System.out.printf("\n# %s %d개가 주문 되었습니다.\n", drinkSelect, dricount);
-        System.out.println(UserMenuList);
+        // UserMenuList에 주문 추가 (카운트 및 총 금액)
+        String orderNumber = new Food_pop(drinkSelect, price * dricount).getOrderNumber();
+        UserMenuList.put(orderNumber, new Food_pop(drinkSelect, price));
+        Food_pop userOrder = UserMenuList.get(orderNumber);
+        userOrder.setPopcount(dricount);
+        userOrder.updateTotalPrice();
+        System.out.printf("\n# %s %d개가 주문 되었습니다. (주문 번호: %s)\n", drinkSelect, dricount, orderNumber);
         ar.autoSave();
     }
 
-//    private static void sideMenuSelect() {
-//        System.out.println("\n# 메뉴 등록을 시작합니다.");
-//
-//        // 메뉴 목록 출력
-//        System.out.println("--------[Menu]--------");
-//        System.out.println("# 1. 나쵸 1000원 #");
-//        System.out.println("# 2. 츄러스 1000원 #");
-//        System.out.println("# 3. 핫도그 1500원 #");
-//        System.out.println("----------------------");
-//
-//        // 사용자로부터 입력 받기
-//        String sidname = input("- 사이드 메뉴 번호 선택: ");
-//        int sidcount;
-//        try {
-//            sidcount = Integer.parseInt(input("- 개수: "));
-//        } catch (NumberFormatException e) {
-//            System.out.println("올바른 숫자를 입력하세요.");
-//            return;
-//        }
-//
-//        String sideSelect = "";
-//        int price = 0;  // 가격 변수 추가
-//
-//        switch (sidname) {
-//            case "1":
-//                sideSelect = "나쵸";
-//                price = 1000;
-//                break;
-//            case "2":
-//                sideSelect = "츄러스";
-//                price = 1000;
-//                break;
-//            case "3":
-//                sideSelect = "핫도그";
-//                price = 1500;
-//                break;
-//            default:
-//                System.out.println("선택하신 번호는 없는 번호입니다.");
-//                return;  // 메뉴 선택 오류 시 메서드 종료
-//        }
-//
-//        // UserMenuList에 주문 추가
-//        UserMenuList.put(sidname, new Food_pop(sideSelect, price * sidcount));
-//        System.out.printf("\n# %s %d개가 주문 되었습니다.\n", sideSelect, sidcount);
-//        ar.autoSave();
-//    }
+    private static void sideMenuSelect() {
+        System.out.println("\n# 메뉴 등록을 시작합니다.");
+
+        // 메뉴 목록 출력
+        System.out.println("--------[Menu]--------");
+        System.out.println("# 1. 나쵸 1000원 #");
+        System.out.println("# 2. 츄러스 1000원 #");
+        System.out.println("# 3. 핫도그 1500원 #");
+        System.out.println("----------------------");
+
+        // 사용자로부터 입력 받기
+        String sidname = input("- 사이드 메뉴 번호 선택: ");
+        int sidcount;
+        try {
+            sidcount = Integer.parseInt(input("- 개수: "));
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력하세요.");
+            return;
+        }
+
+        String sideSelect = "";
+        int price = 0;  // 가격 변수 추가
+
+        switch (sidname) {
+            case "1":
+                sideSelect = "나쵸";
+                price = 1000;
+                break;
+            case "2":
+                sideSelect = "츄러스";
+                price = 1000;
+                break;
+            case "3":
+                sideSelect = "핫도그";
+                price = 1500;
+                break;
+            default:
+                System.out.println("선택하신 번호는 없는 번호입니다.");
+                return;  // 메뉴 선택 오류 시 메서드 종료
+        }
+
+        // UserMenuList에 주문 추가 (카운트 및 총 금액)
+        String orderNumber = new Food_pop(sideSelect, price * sidcount).getOrderNumber();
+        UserMenuList.put(orderNumber, new Food_pop(sideSelect, price));
+        Food_pop userOrder = UserMenuList.get(orderNumber);
+        userOrder.setPopcount(sidcount);
+        userOrder.updateTotalPrice();
+        System.out.printf("\n# %s %d개가 주문 되었습니다. (주문 번호: %s)\n", sideSelect, sidcount, orderNumber);
+        ar.autoSave();
+    }
 
     private static void payMent(){
         //결제화면
@@ -209,14 +214,35 @@ public class FoodView {
         System.out.println("총 결제 금액: " + ar.getTotalOrderPrice()+ "원");
         System.out.println("#1. \uD83D\uDCB3 신용카드( 삼성 / 카카오 페이 ) \uD83D\uDCB3#");
         System.out.println("#2. \uD83D\uDCB2********** 계좌이체 ***********\uD83D\uDCB2#");
+        System.out.println("#3. \uD83D\uDCB2********** 현금 결제 ***********\uD83D\uDCB2#");
         System.out.println("---------------------------------------------------------");
 
-        // 사용자로부터 입력 받기
+        // 결제 방식을 사용자에게 입력받기
         String paymentNum = input("- 결제 번호 선택 - : ");
-        System.out.printf("\n# 총 %d원 결제 되었습니다.\n", ar.getTotalOrderPrice());
+        if (Objects.equals(paymentNum, "1")){
+            System.out.printf("\n# 총 %d원 결제 되었습니다.\n", ar.getTotalOrderPrice());
+            // 주문 목록 초기화 및 저장
+            ar.getUserMenuList().clear();
+            ar.autoSave();
+        } else if(Objects.equals(paymentNum, "2")){
+            String tongjang = input("결제하실 계좌번호 16자리를 입력하여 주십시오.: ");
+            String tongjang_bk = input("입력하신 계좌번호의 은행을 입력해주십시오.: ");
+            String tongjang_pw = input("비밀번호 4자리를 입력하여 주십시오.: ");
+            System.out.printf("\n# %s %s로 총 %d원 결제 되었습니다.\n", tongjang_bk, tongjang, ar.getTotalOrderPrice());
+            // 주문 목록 초기화 및 저장
+            ar.getUserMenuList().clear();
+            ar.autoSave();
+        } else if(Objects.equals(paymentNum, "3")){
+            System.out.printf("현금 결제는 직원에게 문의하여 주십시오. :D");
+            // 주문 목록 초기화 및 저장
+//            ar.getUserMenuList().clear();
+            ar.autoSave();
+        } else {
+            System.out.println("지금 선택하신 번호는 없는 번호입니다.");
+            ar.autoSave();
+        }
 
-        // 주문 목록 초기화 및 저장
-//        ar.getUserMenuList().clear();
-//        ar.autoSave();
+
+
     }
 }

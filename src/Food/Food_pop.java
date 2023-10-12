@@ -20,15 +20,6 @@ public class Food_pop implements Serializable {
         this.totalPrice = 0;
     }
 
-//    public Food_pop(String orderNumber, String name, int price, int popcount, int dricount, int sidcount, int totalPrice) {
-//
-//        this.name = name;
-//        this.price = price;
-//        this.popcount = popcount;
-//        this.dricount = dricount;
-//        this.sidcount = sidcount;
-//        this.totalPrice = totalPrice;
-//    }
 
     // 주문 번호를 생성하는 메서드
     private String generateOrderNumber() {
