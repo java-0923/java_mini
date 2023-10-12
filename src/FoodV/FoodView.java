@@ -1,6 +1,5 @@
 package FoodV;
 import java.util.UUID;
-
 import static FoodV.FoodRepository.*;
 import static util.Utility.input;
 import static util.Utility.makeLine;
@@ -20,7 +19,7 @@ public class FoodView {
 
         while (true) {
             System.out.println("\n\n****** 음식 주문 프로그램 ******");
-            System.out.printf("$ 현재 등록된 주문 $ : %d개\n", ar.count());
+            System.out.printf("$ 현재 등록된 주문 장바구니 $ : %d개\n", ar.count());
             System.out.println("* \uD83C\uDF7F 1. 팝콘 주문 하기");
             System.out.println("# \uD83E\uDD64 2. 음료수 주문 하기");
             System.out.println("% \uD83C\uDF2E 3. 사이드 메뉴 주문 하기");
@@ -39,7 +38,7 @@ public class FoodView {
                     drinkMenuSelect();
                     break;
                 case "3":
-//                    sideMenuSelect();
+                    sideMenuSelect();
                     break;
                 case "4" :
                     payMent();
@@ -149,58 +148,69 @@ public class FoodView {
         }
 
         // UserMenuList에 주문 추가
+        String orderNumber = new Food_pop(drinkSelect, price * dricount).getOrderNumber();
+        UserMenuList.put(orderNumber, new Food_pop(drinkSelect, price));
+        Food_pop userOrder = UserMenuList.get(orderNumber);
+        userOrder.setPopcount(dricount);
+        userOrder.updateTotalPrice();
         UserMenuList.put(UUID.randomUUID().toString().substring(0, 5), new Food_pop(drinkSelect, price * dricount));
         System.out.printf("\n# %s %d개가 주문 되었습니다.\n", drinkSelect, dricount);
         System.out.println(UserMenuList);
         ar.autoSave();
     }
 
-//    private static void sideMenuSelect() {
-//        System.out.println("\n# 메뉴 등록을 시작합니다.");
-//
-//        // 메뉴 목록 출력
-//        System.out.println("--------[Menu]--------");
-//        System.out.println("# 1. 나쵸 1000원 #");
-//        System.out.println("# 2. 츄러스 1000원 #");
-//        System.out.println("# 3. 핫도그 1500원 #");
-//        System.out.println("----------------------");
-//
-//        // 사용자로부터 입력 받기
-//        String sidname = input("- 사이드 메뉴 번호 선택: ");
-//        int sidcount;
-//        try {
-//            sidcount = Integer.parseInt(input("- 개수: "));
-//        } catch (NumberFormatException e) {
-//            System.out.println("올바른 숫자를 입력하세요.");
-//            return;
-//        }
-//
-//        String sideSelect = "";
-//        int price = 0;  // 가격 변수 추가
-//
-//        switch (sidname) {
-//            case "1":
-//                sideSelect = "나쵸";
-//                price = 1000;
-//                break;
-//            case "2":
-//                sideSelect = "츄러스";
-//                price = 1000;
-//                break;
-//            case "3":
-//                sideSelect = "핫도그";
-//                price = 1500;
-//                break;
-//            default:
-//                System.out.println("선택하신 번호는 없는 번호입니다.");
-//                return;  // 메뉴 선택 오류 시 메서드 종료
-//        }
-//
-//        // UserMenuList에 주문 추가
-//        UserMenuList.put(sidname, new Food_pop(sideSelect, price * sidcount));
-//        System.out.printf("\n# %s %d개가 주문 되었습니다.\n", sideSelect, sidcount);
-//        ar.autoSave();
-//    }
+    private static void sideMenuSelect() {
+        System.out.println("\n# 메뉴 등록을 시작합니다.");
+
+        // 메뉴 목록 출력
+        System.out.println("--------[Menu]--------");
+        System.out.println("# 1. 나쵸 1000원 #");
+        System.out.println("# 2. 츄러스 1000원 #");
+        System.out.println("# 3. 핫도그 1500원 #");
+        System.out.println("----------------------");
+
+        // 사용자로부터 입력 받기
+        String sidname = input("- 사이드 메뉴 번호 선택: ");
+        int sidcount;
+        try {
+            sidcount = Integer.parseInt(input("- 개수: "));
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자를 입력하세요.");
+            return;
+        }
+
+        String sideSelect = "";
+        int price = 0;  // 가격 변수 추가
+
+        switch (sidname) {
+            case "1":
+                sideSelect = "나쵸";
+                price = 1000;
+                break;
+            case "2":
+                sideSelect = "츄러스";
+                price = 1000;
+                break;
+            case "3":
+                sideSelect = "핫도그";
+                price = 1500;
+                break;
+            default:
+                System.out.println("선택하신 번호는 없는 번호입니다.");
+                return;  // 메뉴 선택 오류 시 메서드 종료
+        }
+
+        // UserMenuList에 주문 추가
+        String orderNumber = new Food_pop(sideSelect, price * sidcount).getOrderNumber();
+        UserMenuList.put(orderNumber, new Food_pop(sideSelect, price));
+        Food_pop userOrder = UserMenuList.get(orderNumber);
+        userOrder.setPopcount(sidcount);
+        userOrder.updateTotalPrice();
+        UserMenuList.put(UUID.randomUUID().toString().substring(0, 5), new Food_pop(sideSelect, price * sidcount));
+        System.out.printf("\n# %s %d개가 주문 되었습니다.\n", sideSelect, sidcount);
+        System.out.println(UserMenuList);
+        ar.autoSave();
+    }
 
     private static void payMent(){
         //결제화면

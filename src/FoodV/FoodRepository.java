@@ -3,7 +3,6 @@ package FoodV;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-
 public class FoodRepository {
     public static Map<String, Food_pop> MenuList;
     public static Map<String, Food_pop> UserMenuList;
@@ -19,9 +18,6 @@ public class FoodRepository {
         MenuList.put("나쵸", new Food_pop("나쵸", 1000));
         MenuList.put("츄러스", new Food_pop("츄러스", 1000));
         MenuList.put("핫도그", new Food_pop("핫도그", 1500));
-    }
-
-    static {
         UserMenuList = new HashMap<>();
     }
 
@@ -31,16 +27,40 @@ public class FoodRepository {
             menu.setPopcount(popcount);
             menu.setDricount(dricount);
             menu.setSidcount(sidcount);
-            // 총 가격 계산
-            menu.setTotalPrice((popcount + dricount + sidcount) * menu.getPrice());
+            menu.updateTotalPrice();
+
+            if (!UserMenuList.containsKey(menu.getOrderNumber())) {
+                UserMenuList.put(menu.getOrderNumber(), menu);
+            }
+
+            Food_pop userOrder = UserMenuList.get(menu.getOrderNumber());
+            userOrder.setPopcount(popcount);
+            userOrder.setDricount(dricount);
+            userOrder.setSidcount(sidcount);
+            userOrder.updateTotalPrice();
+
             return true;
         }
         return false;
     }
 
+
     public static Map<String, Food_pop> getMenuList() {
         return UserMenuList;
     }
+
+//    public Map<String, Food_pop> getUserMenuList() {
+//        return UserMenuList;
+//    }
+
+    public int getTotalOrderPrice() {
+        int totalPrice = 0;
+        for (Food_pop userOrder : UserMenuList.values()) {
+            totalPrice += userOrder.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
 
     public void autoSave() {
         File f = new File("Menu.sav");
@@ -52,7 +72,6 @@ public class FoodRepository {
         }
     }
 
-    // Load product data from a file
     public void loadFile() {
         File f = new File("Menu.sav");
         if (f.exists()) {
@@ -66,7 +85,7 @@ public class FoodRepository {
     }
 
     public int count() {
-        return UserMenuList.size(); // 주문 수를 얻고자 하는 경우
+        return getMenuList().size();
     }
 
 }
