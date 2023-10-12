@@ -26,7 +26,7 @@ public class FoodView {
             System.out.println("# \uD83E\uDD64 2. 음료수 주문 하기");
             System.out.println("% \uD83C\uDF2E 3. 사이드 메뉴 주문 하기");
             System.out.println("& \uD83D\uDCB3 4. 결제 하기");
-            System.out.println("@ \uD83D\uDEAA 5. 나가기");
+            System.out.println("@ \uD83D\uDEAA 5. 종료");
 
             makeLine();
 

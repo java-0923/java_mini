@@ -1,5 +1,7 @@
 package Ticket;
 
+import com.sun.tools.javac.Main;
+
 import static utilt.Utilty.input;
 
 public class MovieView {
@@ -37,11 +39,11 @@ public class MovieView {
 
     static void ageMainView() {
         System.out.println(" ************************** ");
-        System.out.println("       🍼 애기               ");
+        System.out.println("       🍼 0세               ");
         System.out.println("       🍼 12세               ");
         System.out.println("       🍼 15세               ");
         System.out.println("       🔞 19금              ");
-        System.out.println("       ⬅️ 돌아가기            ");
+        System.out.println("       ⬅️ 종료            ");
         System.out.println(" ************************** ");
     }
 
