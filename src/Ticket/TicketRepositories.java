@@ -28,6 +28,48 @@ public class TicketRepositories{
         }
     }
 
+    /**
+     * 사용자가 입력한 값이랑
+     * 무빙 이름이 같은지 체크
+     *
+     * @retun - moviname
+     */
+    public boolean movieTitle(String input){
+        for (MovieList list : movieList) {
+            if (input.equals(list.getMovieName())){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public void getGenreMovieList(String genre) {
+        MovieList MList = new MovieList();
+        String keyword = "";
+        switch (genre){
+            case "1":
+                keyword = "액션";
+                break;
+            case "2":
+                keyword = "코미디";
+                break;
+            case "3":
+                keyword = "드라마";
+                break;
+            case "4":
+                keyword = "애니메이션";
+                break;
+            case "5":
+                keyword = "공포";
+                break;
+            default:
+
+        }
+        for (MovieList movie : movieList) {
+            if (movie.getGenre().contains(keyword)) {
+                System.out.println(movie.info());
+            }
+        }
+    }
 
 }

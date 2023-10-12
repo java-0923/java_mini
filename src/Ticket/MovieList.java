@@ -1,5 +1,7 @@
 package Ticket;
 
+import java.util.Date;
+
 public class MovieList {
     private String movieName; // 영화 제목
     private String director;  // 감독
@@ -8,6 +10,7 @@ public class MovieList {
     private int ticket_price; // 티켓 값
     private int runtime;  // 상영시간 ( 영화의 길이 )
     private boolean login;// 로그인 여부 ( 할인 )
+    private Date date;
 
 
 

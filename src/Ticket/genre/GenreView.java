@@ -1,13 +1,15 @@
 package Ticket.genre;
 
 import Ticket.MovieView;
+import Ticket.TicketRepositories;
 
 import static utilt.Utilty.input;
 
 public class GenreView {
-
+    TicketRepositories tr;
     public GenreView() {
         choice();
+        tr = new TicketRepositories();
     }
 
     void mainView() {
