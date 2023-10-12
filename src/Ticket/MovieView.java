@@ -1,5 +1,4 @@
 package Ticket;
-
 import Ticket.age.Age;
 import Ticket.genre.GenreView;
 
@@ -11,6 +10,8 @@ public class MovieView {
     public MovieView() {
 
     }
+
+
 
     /**
      * 초가 화면

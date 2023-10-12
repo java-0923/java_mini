@@ -1,7 +1,5 @@
 package Ticket;
 
-import java.util.Date;
-
 public class MovieList {
     private String movieName; // 영화 제목
     private String director;  // 감독
@@ -9,12 +7,14 @@ public class MovieList {
     private int accessAge; // 연령제한
     private int ticket_price; // 티켓 값
     private int runtime;  // 상영시간 ( 영화의 길이 )
+    private int time; // 상영시간 ( 영화 상영 시간 )
     private boolean login;// 로그인 여부 ( 할인 )
-    private Date date;
+    static String[] sArr;
+    TicketRepositories tr = new TicketRepositories();
 
 
-
-    public MovieList(){}
+    public MovieList() {
+    }
 
     //생성자
 
@@ -88,11 +88,51 @@ public class MovieList {
         this.login = login;
     }
 
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     public String info() {
-        return String.format(" 영화제목 : %s \n 감독 : %s \n 장르 : %s \n 연령제한 : %d " +
-                        "\n 티켓가격 : %d \n 상영시간 : %d \n",
-                this.movieName, this.director, this.genre,
-                this.accessAge,  this.ticket_price, this.runtime);
+        return String.format("%s   %s   %s   %d   %d   %d",
+                movieName, director, genre,
+                accessAge, runtime, ticket_price);
+    }
+
+
+        public String[] push(String newName){
+        String[] sArr = tr.getMovieListArr() ;
+        System.out.println(sArr.length);
+        String[] temp = new String[sArr.length +1];
+
+        for (int i = 0; i < sArr.length; i++) {
+            temp[i] = sArr[i];
+        }
+        temp[temp.length-1] = newName;
+        sArr = temp;
+        return sArr;
+    }
+//    public void push(String newName) {
+//
+//        if (sArr == null) {
+//            sArr = new String[1];
+//            sArr[0] = newName;
+//        } else {
+//            String[] temp = new String[sArr.length + 1];
+//
+//            for (int i = 0; i < sArr.length; i++) {
+//                temp[i] = sArr[i];
+//            }
+//            temp[temp.length - 1] = newName;
+//            sArr = temp;
+//        }
+//    }
+
+    public String[] getsArr() {
+        return sArr;
     }
 
 }

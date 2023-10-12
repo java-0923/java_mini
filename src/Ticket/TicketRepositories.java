@@ -2,11 +2,11 @@ package Ticket;
 import java.util.*;
 import java.io.Serializable;
 
-public class TicketRepositories{
+public class TicketRepositories implements Serializable {
 
-    private static MovieList[] movieList;
+    public static MovieList[] movieList;
 
-    public TicketRepositories() {
+    static {
         movieList = new MovieList[]{
                 new MovieList("천박사 퇴마 연구소:설경의 비밀","김성식","액션",12,11500,98),
                 new MovieList("그란 투리스모","닐 블롬캠프","액션",12,14000,134),
@@ -17,23 +17,11 @@ public class TicketRepositories{
                 new MovieList("드림쏭2","마크 밸도","애니메이션",0,11000,90),
                 new MovieList("더 퍼스트 슬램덩크","이노우에 다케히코","애니메이션",12,13500,125),
                 new MovieList("괴담만찬","김용균","공포",15,13000,117),
-                new MovieList("더넌2","공포","마이클 차베즈",15,12000,109),
-                new MovieList("엑소시스트","공포","데이빗 고든 그린",15,12000,111),
+                new MovieList("더넌2","마이클 차베즈","공포",15,12000,109),
+                new MovieList("엑소시스트","데이빗 고든 그린","공포",15,12000,111)
         };
     }
 
-    public void getMovieList() {
-        for (MovieList list : movieList) {
-            System.out.println(list.info());
-        }
-    }
-
-    /**
-     * 사용자가 입력한 값이랑
-     * 무빙 이름이 같은지 체크
-     *
-     * @retun - moviname
-     */
     public boolean movieTitle(String input){
         for (MovieList list : movieList) {
             if (input.equals(list.getMovieName())){
@@ -43,23 +31,38 @@ public class TicketRepositories{
         return false;
     }
 
+    public String[] getMovieListArr(){
+        String[] list = new String[movieList.length];
+        for (int i = 0; i < movieList.length; i++) {
+            list[i] = String.valueOf(movieList[i]);
+        }
+        return list;
+    }
+
+    public void getMovieList() {
+        for (MovieList list : movieList) {
+            System.out.println(list.info());
+        }
+    }
+
+
     public void getGenreMovieList(String genre) {
         MovieList MList = new MovieList();
         String keyword = "";
-        switch (genre){
-            case "1":
+        switch (Integer.parseInt(genre)){
+            case 1:
                 keyword = "액션";
                 break;
-            case "2":
+            case 2:
                 keyword = "코미디";
                 break;
-            case "3":
+            case 3:
                 keyword = "드라마";
                 break;
-            case "4":
+            case 4:
                 keyword = "애니메이션";
                 break;
-            case "5":
+            case 5:
                 keyword = "공포";
                 break;
             default:
@@ -71,5 +74,9 @@ public class TicketRepositories{
             }
         }
     }
+
+
+
+
 
 }
