@@ -3,6 +3,8 @@ package Ticket;
 import Ticket.age.Age;
 import Ticket.genre.GenreView;
 
+import java.awt.*;
+
 import static utilt.Utilty.input;
 
 public class MovieView {
@@ -120,21 +122,57 @@ public class MovieView {
      * 예매를 도와주는 메서드
      */
     void inputMovieName(){
-        String input = input("무빙 이름을 입력하세요 😘");
-        boolean f = tr.movieTitle(input);
-        if (f){
-            click();
-        }else {
-            System.out.println("예매 실페");
-        }
+            String input = input("무빙 이름을 입력하세요 😘");
+            boolean f = tr.movieTitle(input);
+            if (f){
+                click();
+
+            }else {
+                System.out.println("예매 실페");
+            }
     }
 
     private void click(){
-        int[] arr = new int[]{10,20,30};
-
-        for (int i : arr) {
-            System.out.printf("%d:00 \n",i);
+        String[] arr = new String[]{"10","20","30"};
+        System.out.println("*** 시간을 정하세요 ***");
+        for (String i : arr) {
+            System.out.printf("%s:00 \n",i);
         }
-        input("시간을 정하세요!!");
+        String input = input("시간을 정하세요 : ");
+        for (String s : arr) {
+            if(input.equals(s)){
+                System.out.println("좌석을 선택해라 : ");
+                seet();
+            }
+        }
+    }
+    private void seet(){
+        String[][] set = new String[][]{
+                {
+                    "A1" , "A2", "A3"
+                },
+                {
+                    "B1" , "B2", "B3"
+                },
+                {
+                    "C1" , "C2", "C3"
+                }
+        };
+
+        for (String[] strings : set) {
+            for (String string : strings) {
+                System.out.printf(" [%s] ", string);
+            }
+            System.out.println();
+        }
+        String input = input("죄석을 골라 : ");
+        for (String[] strings : set) {
+            for (String string : strings) {
+                if (input.equals(string)){
+                    System.out.println("예매가 정상적으로 성공!!!!!!!!!!!!!!!");
+                    System.exit(0);
+                }
+            }
+        }
     }
 }
